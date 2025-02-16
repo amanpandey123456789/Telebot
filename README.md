@@ -1,103 +1,83 @@
-<<<<<<< HEAD
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+Project Overview
+This project is a Telegram bot developed using the NestJS framework. The bot provides daily weather updates and includes an admin panel for managing bot settings and user accounts. The bot's functionalities include subscribing users for daily weather updates and an admin panel with Google login for authentication. Admins can manage bot settings and user accounts through this panel.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Features
+1. Daily Weather Updates:
+Users can subscribe to receive daily weather updates.
+The bot fetches weather data from an external API (e.g., OpenWeatherMap) and sends weather information to the subscribed users daily.
+2. Admin Panel:
+Google Login authentication for the admin.
+Admins can manage bot settings such as API keys, configurations, etc.
+Admins can manage user accounts, including blocking and deleting users.
+Technologies Used
+NestJS: Framework for building the bot and admin panel.
+TypeScript: Language used for the development of the project.
+Telegram Bot API: For communication with Telegram.
+Google OAuth: For Admin panel authentication.
+PostgreSQL (or any other database): For storing user data and bot settings.
+Axios/Fetch: For making HTTP requests to the weather API.
+Requirements
+Node.js (v14 or above)
+NestJS CLI
+PostgreSQL (or any other relational database of your choice)
+Telegram Bot Token (can be obtained from the BotFather on Telegram)
+OpenWeatherMap API Key (or another weather API service)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Installation & Setup
+1. Clone the repository:
+bash
+Copy
+git clone <your-github-repository-url>
+cd <project-directory>
+2. Install dependencies:
+bash
+Copy
+npm install
+3. Set up environment variables:
+Create a .env file in the root directory and include the following variables:
 
-## Description
+bash
+Copy
+TELEGRAM_BOT_API_KEY=<your-telegram-bot-api-key>
+WEATHER_API_KEY=<your-weather-api-key>
+DATABASE_URL=<your-database-connection-string>
+GOOGLE_CLIENT_ID=<your-google-oauth-client-id>
+GOOGLE_CLIENT_SECRET=<your-google-oauth-client-secret>
+4. Set up the database:
+Create a PostgreSQL database (or use a preferred database).
+Run the migration commands (if using a database ORM like TypeORM).
+bash
+Copy
+npm run migration:run
+5. Run the application:
+bash
+Copy
+npm run start:dev
+Your bot should now be running, and you can test the functionalities of weather updates and the admin panel.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Usage
+Telegram Bot:
+Search for your bot on Telegram using the bot's handle.
+Start a conversation with the bot.
+Use the /subscribe command to subscribe to daily weather updates.
+Use the /unsubscribe command to stop receiving updates.
+The bot will send daily weather updates at the specified time.
+Admin Panel:
+Navigate to the admin panel URL.
+Login with your Google account via the Google OAuth login.
+Use the admin panel to manage user accounts and bot settings.
+API Endpoints
+Admin Panel API:
+POST /auth/google - Authenticate admin using Google OAuth.
+GET /users - Retrieve all users (requires admin privileges).
+DELETE /users/:id - Delete a user by ID (requires admin privileges).
+PATCH /settings - Update bot settings such as API keys.
+Bot API:
+POST /subscribe - Subscribe a user to daily weather updates.
+POST /unsubscribe - Unsubscribe a user from daily updates.
+GET /weather - Retrieve the current weather based on the user’s location.
+Contributing
+Feel free to fork this project and submit pull requests. When submitting a PR, ensure your code follows the style guide and includes relevant tests.
 
-## Project setup
-
-```bash
-$ npm install
-```
-
-## Compile and run the project
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-=======
-# Telebot
->>>>>>> eb2e440a92c348556e15b82cd1d2e13fc4e3ca32
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
